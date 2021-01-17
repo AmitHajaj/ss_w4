@@ -30,11 +30,11 @@ node* build_node()
     node *root = (node*)calloc(1, sizeof(node));
     for(int i=0; i<NUM_OF_LETTERS; i++)
         {
-            root->children[i] = (node*)calloc(1, sizeof(node));
-            root->children[i]->letter = '&';
-            root->is_word = false;
-            root->parent = NULL;
-            root->counter = 0;
+            root->children[i] = NULL;
+            // root->children[i]->letter = '&';
+            // root->is_word = false;
+            // root->parent = NULL;
+            // root->counter = 0;
         }
     return root;
 }
@@ -47,7 +47,7 @@ void add_word(char *word, struct node *root)
     for(int i=0; i<strlen(word); i++)
     {
         //if the current letter don't have a pointer to the next letter in the tree.
-        if(temp->children[word[i]-97]->letter == '&')
+        if(temp->children[word[i]-97] == NULL)
         {
             temp->children[word[i]-97]= build_node(); //build a node.
             temp->children[word[i]-97]->letter = word[i]; //give it the value of the current letter.
@@ -87,14 +87,14 @@ void print_words_preorder(struct node *root)
 		int i;
 		for(i = 0; i < NUM_OF_LETTERS; i++)
         {
-            if(temp->children[i]->letter != '&')
+            if(temp->children[i] != NULL)
             {
                 print_words_preorder(temp->children[i]);
             }
         }
 	}
 }
-
+// print the word in the tree in reverse lexicogaphic order.
 void print_words_reverse_inorder(struct node *root)
 {
     node *temp = root;
@@ -103,7 +103,7 @@ void print_words_reverse_inorder(struct node *root)
         int i;
 		for(i = (NUM_OF_LETTERS-1); i >= 0; i--)
         {
-            if(temp->children[i]->letter != '&')
+            if(temp->children[i] != NULL)
             {
                 print_words_reverse_inorder(temp->children[i]);
             }
@@ -113,6 +113,20 @@ void print_words_reverse_inorder(struct node *root)
            printf("%s %ld\n",temp->word, temp->counter);
         }
 	}
+}
+//when finished printing we call this function to free all of the memory we used at this program.
+void free_memory(struct node* root)
+{
+    if(root != NULL)
+    {
+        int i;
+        for(i = 0; i< NUM_OF_LETTERS; i++)
+        {
+            free_memory(root->children[i]);
+        }
+        free(root->word);
+        free(root);
+    }
 }
 
 int main(int argc, char *argv[])
@@ -173,4 +187,8 @@ int main(int argc, char *argv[])
     {
         print_words_preorder(root);
     }
+
+    free_memory(root);
 }
+
+
