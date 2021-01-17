@@ -161,13 +161,10 @@ int main(int argc, char **argv)
         }
     }
 
-    if(strcmp(argv[0], "r"))
+    if(argv[0] == 'r')
     {
         print_words_reverse_inorder(root);
     }
     print_words_preorder(root);
-    
-
-
 }
 
