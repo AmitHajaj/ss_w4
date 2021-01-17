@@ -161,10 +161,18 @@ int main(int argc, char *argv[])
         }
     }
 
-    if(argv[0] == 'r')
+    int i;
+    for(i=0; i<argc; i++){
+        printf("argv[%d] = %s\n", i, argv[i]);
+    }
+
+    if(strcmp(argv[1], "r"))
     {
         print_words_reverse_inorder(root);
     }
-    print_words_preorder(root);
+    else
+    {
+        print_words_preorder(root);
+    }
 }
 
