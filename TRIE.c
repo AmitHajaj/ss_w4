@@ -115,7 +115,7 @@ void print_words_reverse_inorder(struct node *root)
 	}
 }
 
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
     //this will be our root.
     node *root = build_node();
