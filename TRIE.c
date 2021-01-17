@@ -163,8 +163,8 @@ int main(int argc, char *argv[])
 
     if(argc > 1)
     {
-        printf("%s", argv[1]);
-        if(strcmp(argv[1], "r"))
+    	char c = (char)argv[1][0];
+        if(c == 'r')
         {
             print_words_reverse_inorder(root);
         }
@@ -174,4 +174,3 @@ int main(int argc, char *argv[])
         print_words_preorder(root);
     }
 }
-
