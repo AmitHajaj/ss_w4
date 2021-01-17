@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #define NUM_OF_LETTERS 26 //extra one for the '/0' sign to know if some node is finishes a word.
 #define BIGGEST_LETTER_SIZE 45 // the biggest word in english.(i think)
